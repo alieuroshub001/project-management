@@ -2,15 +2,15 @@
 
 /* Light mode (default) */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
   --primary: #17b6b2;
   --secondary: #ededed;
-  --accent: #0a0a0a;
-  --card-bg: #ffffff;
+  --accent: #00ffc3;
+  --foreground: #ffffff;
+  --background: #0f172a;
+  --card-bg: rgba(255, 255, 255, 0.05);
+  --border-color: rgba(255, 255, 255, 0.1);
   --primary-light: #ffffff;
   --primary-dark: #000000;
-  --border-color: #e5e7eb;
 }
 
 /* Dark mode - system preference */
