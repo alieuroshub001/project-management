@@ -1,26 +1,63 @@
 @import "tailwindcss";
 
+/* Light mode (default) */
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --primary: #17b6b2;
+  --secondary: #ededed;
+  --accent: #0a0a0a;
+  --card-bg: #ffffff;
+  --primary-light: #ffffff;
+  --primary-dark: #000000;
+  --border-color: #e5e7eb; /* Added for consistency */
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
+/* Dark mode - system preference */
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    --secondary: #1a1a1a;
+    --accent: #ffffff;
+    --card-bg: #000000;
+    --border-color: #374151; /* Added for consistency */
   }
 }
 
+/* Dark mode - class-based (takes precedence) */
+.dark {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+  --primary: #17b6b2;
+  --secondary: #1a1a1a;
+  --accent: #ffffff;
+  --card-bg: #000000;
+  --transparent-bg: transparent;
+  --border-color: #374151;
+}
+
+/* Theme variables for Tailwind */
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
+  
+  --font-sans: Arial, Helvetica, sans-serif; /* Replaced Geist with standard fonts */
+  --font-mono: monospace; /* Standard monospace fallback */
+}
+
+/* Base styles */
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Smooth transitions for theme switching */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
