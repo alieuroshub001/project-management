@@ -134,26 +134,16 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
       {/* Right side - Auth Form */}
       <div className="w-full lg:w-2/5 flex items-center justify-center p-6 lg:p-12 relative">
         {/* Glassmorphism Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-white/5 to-transparent backdrop-blur-sm"></div>
+        <div className="absolute inset-0 glassmorphism"></div>
         
         <div className="w-full max-w-md relative z-10">
           {/* Form Container */}
-          <div className="relative group">
-            {/* Animated Border */}
-            <div className="absolute -inset-0.5 bg-gradient-to-r from-transparent via-transparent to-transparent rounded-3xl blur opacity-20 group-hover:opacity-40 transition duration-1000 animate-gradient-xy" style={{
-              backgroundImage: `linear-gradient(45deg, var(--primary), transparent, var(--primary), transparent, var(--primary))`
-            }}></div>
-            
+          <div className="auth-form-container">
             {/* Main Form Card */}
             <div className="relative rounded-3xl p-8 lg:p-10 shadow-2xl border backdrop-blur-xl" style={{
               backgroundColor: 'var(--card-bg)',
               borderColor: 'var(--border-color)'
             }}>
-              {/* Subtle Inner Glow */}
-              <div className="absolute inset-0 rounded-3xl opacity-5" style={{
-                background: `radial-gradient(circle at 50% 50%, var(--primary) 0%, transparent 70%)`
-              }}></div>
-              
               {/* Content */}
               <div className="relative z-10">
                 {children}
@@ -162,87 +152,6 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
           </div>
         </div>
       </div>
-      
-      {/* Enhanced CSS Animations */}
-      <style jsx>{`
-        @keyframes float {
-          0%, 100% { transform: translateY(0px) rotate(0deg); }
-          33% { transform: translateY(-20px) rotate(120deg); }
-          66% { transform: translateY(-10px) rotate(240deg); }
-        }
-        
-        @keyframes morph-1 {
-          0%, 100% { transform: rotate(0deg) scale(1); border-radius: 50%; }
-          33% { transform: rotate(120deg) scale(1.1); border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
-          66% { transform: rotate(240deg) scale(0.9); border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%; }
-        }
-        
-        @keyframes morph-2 {
-          0%, 100% { transform: rotate(45deg) scale(1); border-radius: 20%; }
-          50% { transform: rotate(225deg) scale(1.2); border-radius: 50%; }
-        }
-        
-        @keyframes morph-3 {
-          0%, 100% { transform: scale(1); border-radius: 50%; }
-          33% { transform: scale(1.3); border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
-          66% { transform: scale(0.8); border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%; }
-        }
-        
-        @keyframes glow {
-          0%, 100% { opacity: 0.2; transform: scale(1); }
-          50% { opacity: 0.4; transform: scale(1.1); }
-        }
-        
-        @keyframes gradient-x {
-          0%, 100% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-        }
-        
-        @keyframes gradient-xy {
-          0%, 100% { background-position: 0% 50%; }
-          25% { background-position: 100% 50%; }
-          50% { background-position: 100% 100%; }
-          75% { background-position: 0% 100%; }
-        }
-        
-        .animate-float {
-          animation: float 8s ease-in-out infinite;
-        }
-        
-        .animate-morph-1 {
-          animation: morph-1 15s ease-in-out infinite;
-        }
-        
-        .animate-morph-2 {
-          animation: morph-2 12s ease-in-out infinite;
-        }
-        
-        .animate-morph-3 {
-          animation: morph-3 18s ease-in-out infinite;
-        }
-        
-        .animate-glow {
-          animation: glow 4s ease-in-out infinite;
-        }
-        
-        .animate-gradient-x {
-          animation: gradient-x 3s ease infinite;
-          background-size: 200% 200%;
-        }
-        
-        .animate-gradient-xy {
-          animation: gradient-xy 3s ease infinite;
-          background-size: 200% 200%;
-        }
-        
-        .animation-delay-500 {
-          animation-delay: 500ms;
-        }
-        
-        .animation-delay-1000 {
-          animation-delay: 1000ms;
-        }
-      `}</style>
     </div>
   );
 }
@@ -256,17 +165,11 @@ function FeatureCard({ icon, title, description, delay }: {
 }) {
   return (
     <div 
-      className="group p-4 rounded-2xl backdrop-blur-sm transition-all duration-500 hover:scale-105 cursor-pointer border border-white/10 hover:border-white/20"
-      style={{ 
-        animationDelay: delay,
-        backgroundColor: 'rgba(255, 255, 255, 0.05)'
-      }}
+      className="feature-card group p-4 rounded-2xl transition-all duration-500 hover:scale-105 cursor-pointer"
+      style={{ animationDelay: delay }}
     >
       <div className="flex items-start space-x-3">
-        <div className="p-2 rounded-xl group-hover:scale-110 transition-transform duration-300" style={{
-          backgroundColor: 'var(--primary)',
-          opacity: 0.1
-        }}>
+        <div className="feature-icon-container p-2 rounded-xl transition-transform duration-300">
           {icon}
         </div>
         <div className="flex-1 min-w-0">

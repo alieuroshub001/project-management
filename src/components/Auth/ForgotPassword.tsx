@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { AuthService } from '@/services/auth';
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState('');
@@ -10,23 +11,22 @@ export default function ForgotPassword() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    setError('');
-    setMessage('');
-    
-    try {
-      // Replace with actual password reset logic
-      console.log('Sending reset link to:', email);
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      setMessage('Password reset link sent to your email');
-    } catch (err) {
-      setError('Error sending reset link. Please try again.');
-    } finally {
-      setLoading(false);
-    }
-  };
+  // Modify the handleSubmit function
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setLoading(true);
+  setError('');
+  setMessage('');
+  
+  try {
+    await AuthService.sendPasswordResetEmail({ email });
+    setMessage('Password reset link sent to your email');
+  } catch (err) {
+    setError(err instanceof Error ? err.message : 'Error sending reset link');
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div className="max-w-md w-full mx-auto p-6 rounded-lg shadow-md">

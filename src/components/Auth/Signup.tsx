@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { AuthService } from '@/services/auth';
 
 export default function Signup() {
   const [name, setName] = useState('');
@@ -11,22 +12,25 @@ export default function Signup() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    setError('');
-    
-    try {
-      // Replace with actual signup logic
-      console.log('Signing up with:', { name, email, password });
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      router.push('/verify-email');
-    } catch (err) {
-      setError('Error creating account. Please try again.');
-    } finally {
-      setLoading(false);
-    }
-  };
+  // Modify the handleSubmit function
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setLoading(true);
+  setError('');
+  
+  try {
+    // First create the user
+    await AuthService.signUp({ email, password, name });
+    // Then send OTP
+    await AuthService.sendOtp(email);
+    // Pass email to OTP verification page
+    router.push(`/verify-otp?email=${encodeURIComponent(email)}`);
+  } catch (err) {
+    setError(err instanceof Error ? err.message : 'Error creating account');
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div className="max-w-md w-full mx-auto p-6 rounded-lg shadow-md">

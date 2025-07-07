@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { AuthService } from '@/services/auth';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -10,22 +11,21 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    setError('');
-    
-    try {
-      // Replace with actual authentication logic
-      console.log('Logging in with:', { email, password });
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      router.push('/dashboard');
-    } catch (err) {
-      setError('Invalid email or password');
-    } finally {
-      setLoading(false);
-    }
-  };
+  // Modify the handleSubmit function
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setLoading(true);
+  setError('');
+  
+  try {
+    await AuthService.login({ email, password });
+    router.push('/superadmin/dashboard');
+  } catch (err) {
+    setError(err instanceof Error ? err.message : 'Invalid email or password');
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div className="max-w-md w-full mx-auto p-6 rounded-lg shadow-md">

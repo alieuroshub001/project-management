@@ -1,7 +1,7 @@
 "use client"
 import { useState } from 'react';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { AuthService } from '@/services/auth';
 
 export default function OtpVerification() {
   const [otp, setOtp] = useState(['', '', '', '', '', '']);
@@ -17,7 +17,6 @@ export default function OtpVerification() {
       newOtp[index] = value;
       setOtp(newOtp);
       
-      // Auto-focus next input
       if (value && index < 5) {
         const nextInput = document.getElementById(`otp-${index + 1}`);
         if (nextInput) nextInput.focus();
@@ -36,9 +35,12 @@ export default function OtpVerification() {
         throw new Error('Please enter a 6-digit code');
       }
       
-      // Replace with actual OTP verification logic
-      console.log('Verifying OTP:', fullOtp);
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      const params = new URLSearchParams(window.location.search);
+      const email = params.get('email');
+      
+      if (!email) throw new Error('Email not found');
+      
+      await AuthService.verifyOtp({ email, token: fullOtp });
       router.push('/dashboard');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Invalid verification code');
@@ -47,7 +49,7 @@ export default function OtpVerification() {
     }
   };
 
-  const handleResend = () => {
+  const handleResend = async () => {
     setResendDisabled(true);
     setCountdown(30);
     
@@ -55,16 +57,21 @@ export default function OtpVerification() {
       setCountdown(prev => {
         if (prev <= 1) {
           clearInterval(timer);
-          setResendDisabled(false);
           return 0;
         }
         return prev - 1;
       });
     }, 1000);
     
-    // Replace with actual resend logic
-    console.log('Resending OTP');
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const email = params.get('email');
+      if (email) await AuthService.sendOtp(email);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Error resending code');
+    }
   };
+
 
   return (
     <div className="max-w-md w-full mx-auto p-6 rounded-lg shadow-md">
