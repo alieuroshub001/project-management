@@ -87,10 +87,32 @@ export default function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
       icon: <SupportIcon />,
       href: '/superadmin/support',
       badge: '3'
-    }
+    },
+  {
+    id: 'chat',
+    label: 'Chat',
+      icon: <ChatIcon />,
+      href: '/superadmin/chat',
+      badge: null
+    },
+     {
+      id: 'chat',
+      label: 'Chat',
+      icon: <ChatIcon />,
+      href: null,
+      badge: null,
+      submenu: [
+        { label: 'Team', href: '/superadmin/chat/team' },
+        { label: 'Security', href: '/superadmin/settings/security' },
+        { label: 'Integrations', href: '/superadmin/settings/integrations' },
+        { label: 'Backup', href: '/superadmin/settings/backup' }
+      ]
+    },
+    
+    // <-- Remove this trailing comma if present
   ];
-
-  return (
+  
+    return (
     <div className={`fixed left-0 top-0 h-full bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-700 transition-all duration-300 z-30 ${
       isCollapsed ? 'w-16' : 'w-64'
     }`}>
@@ -295,3 +317,12 @@ function ChevronIcon({ isExpanded }: { isExpanded: boolean }) {
     </svg>
   );
 }
+// Chat Icon Component
+function ChatIcon() {
+  return (
+    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M21 12c0 4.418-4.03 8-9 8a9.77 9.77 0 01-4.39-1.025L3 21l1.303-3.908C3.486 16.073 3 14.574 3 13c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+    </svg>
+  );
+}
+
