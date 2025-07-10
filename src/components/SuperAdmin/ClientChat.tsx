@@ -1,9 +1,9 @@
 'use client';
 import { useState } from 'react';
 
-export default function TeamChat() {
+export default function ClientChat() {
   const [messages, setMessages] = useState([
-    { id: 1, text: 'Hi, this is Team!', sender: 'admin', time: '9:30 AM' },
+    { id: 1, text: 'Hello from Client!', sender: 'admin', time: '7:00 AM' },
   ]);
   const [input, setInput] = useState('');
 
@@ -17,7 +17,7 @@ export default function TeamChat() {
     <div className="flex flex-col h-full">
       {/* Header */}
       <div className="p-4 border-b dark:border-gray-700 bg-white dark:bg-gray-900">
-        <h2 className="text-lg font-semibold text-gray-800 dark:text-white">Team </h2>
+        <h2 className="text-lg font-semibold text-gray-800 dark:text-white">Client</h2>
         <p className="text-sm text-green-500">Online</p>
       </div>
 
@@ -55,3 +55,4 @@ export default function TeamChat() {
     </div>
   );
 }
+

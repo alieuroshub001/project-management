@@ -88,13 +88,6 @@ export default function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
       href: '/superadmin/support',
       badge: '3'
     },
-  {
-    id: 'chat',
-    label: 'Chat',
-      icon: <ChatIcon />,
-      href: '/superadmin/chat',
-      badge: null
-    },
      {
       id: 'chat',
       label: 'Chat',
@@ -103,9 +96,9 @@ export default function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
       badge: null,
       submenu: [
         { label: 'Team', href: '/superadmin/chat/team' },
-        { label: 'Security', href: '/superadmin/settings/security' },
-        { label: 'Integrations', href: '/superadmin/settings/integrations' },
-        { label: 'Backup', href: '/superadmin/settings/backup' }
+        { label: 'Adminx', href: '/superadmin/chat/adminx' },
+        { label: 'Client', href: '/superadmin/chat/client' },
+       
       ]
     },
     

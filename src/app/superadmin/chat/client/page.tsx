@@ -1,11 +1,11 @@
 'use client';
-import AdminXChatComponent from '@/components/SuperAdmin/AdminXChat';
+import ClientChatComponent from '@/components/SuperAdmin/ClientChat';
 import SuperAdminLayout from '@/components/SuperAdmin/Layout';
 
-export default function AdminXChat() {
+export default function ClientChat() {
   return (
     <SuperAdminLayout>
-      <AdminXChatComponent />
+      <ClientChatComponent/>
     </SuperAdminLayout>
   );
 }

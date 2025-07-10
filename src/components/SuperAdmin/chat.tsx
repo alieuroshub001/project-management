@@ -20,7 +20,7 @@ export default function ChatPage() {
       <div className="w-64 border-r dark:border-gray-800 bg-gray-100 dark:bg-gray-800 p-4 space-y-4">
         <h2 className="text-xl font-semibold text-gray-800 dark:text-white">Messages</h2>
         <div className="space-y-2">
-          {['Client A', 'Team ', 'Admin X'].map((user, index) => (
+          {['Client', 'Team ', 'Admin X'].map((user, index) => (
             <div
               key={index}
               className="flex items-center p-2 bg-white dark:bg-gray-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 cursor-pointer justify-between"
